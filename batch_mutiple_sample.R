@@ -47,6 +47,6 @@ all.exons <- new('ExomeDepth', test = my.test, reference = my.reference.selected
 all.exons <- CallCNVs(x = all.exons, transition.probability = 10^-4, chromosome = myCount.dafr$space, start = myCount.dafr$start, end = myCount.dafr$end, name = myCount.dafr$names)
 print("enter output dir")
 output.dir <- scan(file = "", what = "", nmax = 1)
-sample <- substring(test.sample,1,4)
+sample <- substring(test.sample,1,5)
 output.file <-paste(output.dir, sample, 'csv', sep = '')
 write.csv(file = output.file, x = all.exons@CNV.calls, row.names = FALSE)
