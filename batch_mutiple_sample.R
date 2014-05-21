@@ -23,12 +23,17 @@ myCount.dafr <- read.csv(data)
 
 
 print("which samples do you want to use as reference?")
-my.ref.samples <- scan(file = "", what = "", nmax =30)
+my.file <- scan(file = "", what = "", nmax =30)
+con<-file(my.file,"rt")
+my.ref.samples <- readLines(con)
+
+#my.ref.samples <- readLines(con = stdin(),n = -1L, ok = TRUE, warn = TRUE,encoding = "unknown")
+#my.ref.samples <- scan(file = "", what = "", nmax =30)
 
 
 print(my.ref.samples)
 
-print("enter test sample")
+print("enter test sample list")
 
 test.sample <- scan(file = "", what = "", nmax = 1)
 
