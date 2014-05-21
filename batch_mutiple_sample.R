@@ -48,5 +48,5 @@ all.exons <- CallCNVs(x = all.exons, transition.probability = 10^-4, chromosome 
 print("enter output dir")
 output.dir <- scan(file = "", what = "", nmax = 1)
 sample <- substring(test.sample,1,5)
-output.file <-paste(output.dir, sample, 'csv', sep = '')
+output.file <-paste(output.dir, sample, '.csv', sep = '')
 write.csv(file = output.file, x = all.exons@CNV.calls, row.names = FALSE)
