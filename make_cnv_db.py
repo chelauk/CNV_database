@@ -24,9 +24,9 @@ args = parser.parse_args()
 
 
 print ("Input file: %s" % args.input )
-print ("Database file: %s" args.database)
-print ("Output file: %s"  args.output)
-print ("Sample name: %s" args.sample)
+print ("Database file: %s" % args.database)
+print ("Output file: %s" % args.output)
+print ("Sample name: %s" % args.sample)
 
 sample=args.sample
 
