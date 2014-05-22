@@ -33,25 +33,48 @@ my.ref.samples <- readLines(con)
 
 print(my.ref.samples)
 
-print("enter test sample list")
 
-test.sample <- scan(file = "", what = "", nmax = 1)
+run_test <- function() {
+
+	print("enter test sample")
+
+	test.sample <- scan(file = "", what = "", nmax = 1)
 
 
-my.test <- myCount.dafr[, test.sample]
+	my.test <- myCount.dafr[, test.sample]
 
-my.reference.set <- as.matrix(myCount.dafr[, my.ref.samples])
-my.choice <- select.reference.set (test.counts = my.test, reference.counts = my.reference.set, bin.length = (myCount.dafr$end - myCount.dafr$start)/1000, n.bins.reduced = 10000)
+	my.reference.set <- as.matrix(myCount.dafr[, my.ref.samples])
+	my.choice <- select.reference.set (test.counts = my.test, reference.counts = my.reference.set, bin.length = (myCount.dafr$end - myCount.dafr$start)/1000, n.bins.reduced = 10000)
 
-print(my.choice[[1]])
+	print(my.choice[[1]])
 
-my.matrix <- as.matrix(myCount.dafr[, my.choice$reference.choice, drop = FALSE])
-my.reference.selected <- apply(X = my.matrix, MAR = 1, FUN = sum)
+	my.matrix <- as.matrix(myCount.dafr[, my.choice$reference.choice, drop = FALSE])
+	my.reference.selected <- apply(X = my.matrix, MAR = 1, FUN = sum)
 
-all.exons <- new('ExomeDepth', test = my.test, reference = my.reference.selected, formula = 'cbind(test, reference) ~ 1')
-all.exons <- CallCNVs(x = all.exons, transition.probability = 10^-4, chromosome = myCount.dafr$space, start = myCount.dafr$start, end = myCount.dafr$end, name = myCount.dafr$names)
-print("enter output dir")
-output.dir <- scan(file = "", what = "", nmax = 1)
-sample <- substring(test.sample,1,5)
-output.file <-paste(output.dir, sample, '.csv', sep = '')
-write.csv(file = output.file, x = all.exons@CNV.calls, row.names = FALSE)
+	all.exons <- new('ExomeDepth', test = my.test, reference = my.reference.selected, formula = 'cbind(test, reference) ~ 1')
+	all.exons <- CallCNVs(x = all.exons, transition.probability = 10^-4, chromosome = myCount.dafr$space, start = myCount.dafr$start, end = myCount.dafr$end, name = myCount.dafr$names)
+	print("enter output dir")
+	output.dir <- scan(file = "", what = "", nmax = 1)
+	sample <- substring(test.sample,1,5)
+	output.file <-paste(output.dir, sample, '.csv', sep = '')
+	write.csv(file = output.file, x = all.exons@CNV.calls, row.names = FALSE)
+	test_question()
+}
+
+
+test_question <- function(){
+print("print do you want to run test y or n")
+ 
+r <- scan(file = "", what = "", nmax = 1)
+
+if ( r == "y" ){
+run_test()
+}
+}
+
+test_question()
+
+
+
+
+
