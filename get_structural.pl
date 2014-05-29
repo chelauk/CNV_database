@@ -24,7 +24,7 @@ my $slice_adaptor = $registry->get_adaptor( 'Human', 'Core', 'Slice' );
 
 while (<$fh>){
 chomp;
-if($_ =~ /^"/){print $outfh $_,"DGVa\n",'<br />'}
+if($_ =~ /^"/){print $outfh $_,",","DGVa_start",",","DGVa_end",",","length",",","DGVa\n",'<br />'}
 else{
 my @line=split(/\,/, $_);
 my $start=$line[4];
