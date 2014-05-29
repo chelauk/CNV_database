@@ -45,6 +45,8 @@ my @starts_and_ends;
 foreach my $svf (@$svfs) {
 	my $svf_start = $svf->seq_region_start;
 	my $svf_end = $svf->seq_region_end;
+
+# if the structural variant has a start equal or before our start and and end equal or after our end:
 	if(($svf_start<=$start)&&($svf_end>=$end)){
 # stick the start and end values in to an array
 	push(@starts_and_ends,$svf_start);
@@ -65,12 +67,8 @@ splice @starts_and_ends, 2, 2;
 }
 }
 
-
-
-
 foreach my $svf (@$svfs) {
 if (($starts_and_ends[0] == $svf->seq_region_start) && ($starts_and_ends[1] == $svf->seq_region_end)){
-
 	my $var_name = $svf->variation_name;
 	my $start = $svf->seq_region_start;
 	my $end = $svf->seq_region_end;
@@ -78,5 +76,6 @@ if (($starts_and_ends[0] == $svf->seq_region_start) && ($starts_and_ends[1] == $
 	print $outfh	$_,",",$start,",",$end,",",$length,",",'<a href="http://www.ncbi.nlm.nih.gov/dbvar/?term=',$var_name,'">',$var_name,'</a><br />',"\n";
 			}
 }
+
 }
 }
