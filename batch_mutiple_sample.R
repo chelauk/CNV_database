@@ -23,7 +23,7 @@ myCount.dafr <- read.csv(data)
 
 
 print("which samples do you want to use as reference?")
-my.file <- scan(file = "", what = "", nmax =30)
+my.file <- scan(file = "", what = "", nmax = 100)
 con<-file(my.file,"rt")
 my.ref.samples <- readLines(con)
 
@@ -55,8 +55,8 @@ run_test <- function() {
 	all.exons <- CallCNVs(x = all.exons, transition.probability = 10^-4, chromosome = myCount.dafr$space, start = myCount.dafr$start, end = myCount.dafr$end, name = myCount.dafr$names)
 	print("enter output dir")
 	output.dir <- scan(file = "", what = "", nmax = 1)
-	sample <- substring(test.sample,1,5)
-	output.file <-paste(output.dir, sample, '.csv', sep = '')
+	sample <- substring(test.sample,1,7)
+	output.file <-paste(output.dir, sample, 'csv', sep = '')
 	write.csv(file = output.file, x = all.exons@CNV.calls, row.names = FALSE)
 	test_question()
 }
